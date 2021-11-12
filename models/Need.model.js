@@ -10,6 +10,10 @@ const needSchema = new Schema(
       type: String,
       required: [true, "Description is required."],
     },
+    senior: {
+      type: Schema.Types.ObjectId,
+      ref: "Senior",
+    },
   },
   {
     timestamps: true,
