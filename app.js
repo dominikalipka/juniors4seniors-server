@@ -19,7 +19,17 @@ require("./config")(app);
 const allRoutes = require("./routes");
 app.use("/api", allRoutes);
 
+const index = require("./routes/index");
+app.use("/", index);
+
+const seniorRouter = require("./routes/senior.routes");
+app.use("/api", seniorRouter);
+
+const authRouter = require("./routes/auth");
+app.use('/api', authRouter)
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
+
 
 module.exports = app;
