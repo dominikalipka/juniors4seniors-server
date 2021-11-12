@@ -29,7 +29,7 @@ router.get("/seniors/:seniorId/needs/:needId", (req, res, next) => {
 });
 
 // edit a specific need
-router.put("/needs/:needId", (req, res, next) => {
+router.put("/seniors/:seniorId/needs/:needId", (req, res, next) => {
   const { needId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(needId)) {
@@ -45,7 +45,7 @@ router.put("/needs/:needId", (req, res, next) => {
 });
 
 // delete a specific need
-router.delete("/needs/:needId", (req, res, next) => {
+router.delete("/seniors/:seniorId/needs/:needId", (req, res, next) => {
   const { needId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(needId)) {
@@ -54,8 +54,10 @@ router.delete("/needs/:needId", (req, res, next) => {
   }
 
   Need.findByIdAndRemove(needId)
-   .then(() => res.json({ message: `Need with ${needId} is removed successfully.` }))
-    .catch(error => res.json(error));
+    .then(() =>
+      res.json({ message: `Need with ${needId} is removed successfully.` })
+    )
+    .catch((error) => res.json(error));
 });
 
 module.exports = router;

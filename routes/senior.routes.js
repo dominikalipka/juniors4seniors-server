@@ -36,7 +36,7 @@ router.get("/seniors/:seniorId", (req, res, next) => {
   }
 
   Senior.findById(seniorId)
-//  .populate('needsList')
+  .populate('needsList')
   .then((senior) => res.status(200).json(senior))
   .catch(err => res.json(err))
 });
