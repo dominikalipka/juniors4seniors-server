@@ -6,13 +6,14 @@ const Senior = require(".././models/Senior.model");
 
 //create new Senior
 router.post("/seniors", (req, res, next) => {
-  const { name, location, contact } = req.body;
+  const { name, location, contact, image } = req.body;
 
   Senior.create({
     name,
     location,
     contact,
     needsList: [],
+    image
   })
     .then((response) => res.json(response))
     .catch((err) => res.json(err));

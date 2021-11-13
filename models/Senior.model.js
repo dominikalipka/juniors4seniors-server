@@ -14,6 +14,10 @@ const seniorSchema = new Schema(
       type: String,
       required: [true, "Contact number is required."],
     },
+    image: {
+      type: String,
+      required: [true, "Image is required."],
+    },
     needsList: [{ type: Schema.Types.ObjectId, ref: "Need" }],
   },
 
