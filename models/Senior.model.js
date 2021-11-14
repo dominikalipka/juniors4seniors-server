@@ -19,6 +19,7 @@ const seniorSchema = new Schema(
       required: [true, "Image is required."],
     },
     needsList: [{ type: Schema.Types.ObjectId, ref: "Need" }],
+    helper: [{ type: Schema.Types.ObjectId, ref: "User" }],
   },
 
   {
