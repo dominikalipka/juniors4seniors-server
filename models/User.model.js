@@ -14,7 +14,8 @@ const userSchema = new Schema(
     role: {
       type: String,
       default: "user",
-    }
+    },
+    seniorsList: [{ type: Schema.Types.ObjectId, ref: "Senior" }],
   },
 
   {
