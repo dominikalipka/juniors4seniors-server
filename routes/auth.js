@@ -12,7 +12,7 @@ const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
 router.get("/loggedin", (req, res) => {
-  res.json(req.session.user);
+  res.json(req.user);
 });
 
 router.post("/signup", isLoggedOut, (req, res) => {
@@ -30,11 +30,10 @@ router.post("/signup", isLoggedOut, (req, res) => {
     });
   }
 
-
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
 
   if (!regex.test(password)) {
-    return res.status(400).json( {
+    return res.status(400).json({
       errorMessage:
         "Password needs to have at least 8 chars and must contain at least one number, one lowercase and one uppercase letter.",
     });
@@ -76,6 +75,8 @@ router.post("/signup", isLoggedOut, (req, res) => {
 router.post("/login", isLoggedOut, (req, res, next) => {
   const { username, password } = req.body;
 
+  console.log("one....");
+
   if (!username) {
     return res
       .status(400)
@@ -88,9 +89,15 @@ router.post("/login", isLoggedOut, (req, res, next) => {
     });
   }
 
+  console.log("two....");
+
   User.findOne({ username })
     .then((user) => {
+      console.log("two and half....");
+      console.log(typeof user);
+      console.log(user);
       if (!user) {
+        console.log("user doesnt exist in DB");
         return res.status(400).json({ errorMessage: "Wrong credentials." });
       }
 
@@ -98,12 +105,14 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         if (!isSamePassword) {
           return res.status(400).json({ errorMessage: "Wrong credentials." });
         }
+        console.log("three....login was success");
         req.session.user = user;
         return res.json(user);
       });
     })
 
     .catch((err) => {
+      console.log("four....");
       next(err);
       // return res.status(500).render("login", { errorMessage: err.message });
     });
