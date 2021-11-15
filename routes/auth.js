@@ -75,8 +75,6 @@ router.post("/signup", isLoggedOut, (req, res) => {
 router.post("/login", isLoggedOut, (req, res, next) => {
   const { username, password } = req.body;
 
-  console.log("one....");
-
   if (!username) {
     return res
       .status(400)
@@ -89,13 +87,8 @@ router.post("/login", isLoggedOut, (req, res, next) => {
     });
   }
 
-  console.log("two....");
-
   User.findOne({ username })
     .then((user) => {
-      console.log("two and half....");
-      console.log(typeof user);
-      console.log(user);
       if (!user) {
         console.log("user doesnt exist in DB");
         return res.status(400).json({ errorMessage: "Wrong credentials." });
@@ -105,7 +98,6 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         if (!isSamePassword) {
           return res.status(400).json({ errorMessage: "Wrong credentials." });
         }
-        console.log("three....login was success");
         req.session.user = user;
         return res.json(user);
       });
