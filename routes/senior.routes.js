@@ -7,7 +7,7 @@ const Senior = require(".././models/Senior.model");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
 //create new Senior
-router.post("/seniors", (req, res, next) => {
+router.post("/seniors", isLoggedIn, (req, res, next) => {
   const { name, location, contact, image } = req.body;
 
   Senior.create({
@@ -30,7 +30,7 @@ router.get("/seniors", (req, res, next) => {
 });
 
 //get specific Senior
-router.get("/seniors/:seniorId", (req, res, next) => {
+router.get("/seniors/:seniorId",isLoggedIn, (req, res, next) => {
   const { seniorId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(seniorId)) {
