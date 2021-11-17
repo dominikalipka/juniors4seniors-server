@@ -19,7 +19,7 @@ router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
 });
 
 //create new Senior
-router.post("/seniors", isLoggedIn, (req, res, next) => {
+router.post("/seniors", (req, res, next) => {
   const { name, location, contact, imageUrl } = req.body;
 
   Senior.create({ name, location, contact, imageUrl })
@@ -36,7 +36,7 @@ router.get("/seniors", (req, res, next) => {
 });
 
 //get specific Senior
-router.get("/seniors/:seniorId", isLoggedIn, (req, res, next) => {
+router.get("/seniors/:seniorId", (req, res, next) => {
   const { seniorId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(seniorId)) {
