@@ -14,7 +14,7 @@ const seniorSchema = new Schema(
       type: String,
       required: [true, "Contact number is required."],
     },
-    image: {
+    imageUrl: {
       type: String,
       required: [true, "Image is required."],
     },
