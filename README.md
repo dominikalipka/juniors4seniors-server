@@ -1,6 +1,6 @@
 ## juniors4seniors - full-stack web app
 
-<img width="300" alt="" src="./src/images/logo.png">
+# This repository is a backend part of juniors4seniors web app.
 
 # About
 
